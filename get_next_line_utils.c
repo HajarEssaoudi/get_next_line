@@ -3,10 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 23:32:11 by root              #+#    #+#             */
-/*   Updated: 2024/11/26 23:32:12 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 22:01:34 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+int ft_strlen(char *str)
+{
+	int	count;
+
+	count = 0;
+	while (*str)
+	{
+		str++;
+		count++;
+	}
+	return (count);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+		{
+			return ((char *)s);
+		}
+		s++;
+	}
+	if (*s == (char)c)
+		return ((char *)s);
+	return (NULL);
+}
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char			*p;
+	unsigned int	i;
+	size_t			j;
+
+	i = 0;
+	j = start;
+	// if (!s || start > ft_strlen(s))
+	// 	return (ft_strdup(""));
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	p = (char *)malloc(len + 1);
+	if (!p)
+		return (NULL);
+	while (s[j] && j < start + len)
+	{
+		p[i] = s[j];
+		i++;
+		j++;
+	}
+	p[i] = '\0';
+	return (p);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		i;
+	int		j;
+	char	*p;
+
+	i = 0;
+	j = 0;
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
+	p = (char *)malloc(i + j + 1);
+	if (!p)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		p[i++] = s2[j++];
+	p[i] = '\0';
+	return (p);
+}
+
+char	*ft_strdup(char *s)
+{
+	char	*ss;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = 0;
+	while (s[len])
+		len++;
+	ss = (char *)malloc(len + 1);
+	if (!ss)
+		return (NULL);
+	while (i < len)
+	{
+		ss[i] = s[i];
+		i++;
+	}
+	ss[i] = '\0';
+	return (ss);
+}
