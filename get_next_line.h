@@ -6,7 +6,7 @@
 /*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 23:22:11 by root              #+#    #+#             */
-/*   Updated: 2024/11/28 21:33:13 by hes-saou         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:44:50 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 # include <stddef.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 0
 # endif
 
 char	*get_next_line(int fd);
-int		ft_strlen(char *str);
+char	*get_line(int fd);
+size_t	ft_strlen(char *str);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);

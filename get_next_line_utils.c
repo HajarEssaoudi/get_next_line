@@ -6,16 +6,18 @@
 /*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 23:32:11 by root              #+#    #+#             */
-/*   Updated: 2024/11/28 22:01:34 by hes-saou         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:32:35 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	int	count;
+	size_t	count;
 
+	if (!str)
+        return (0);
 	count = 0;
 	while (*str)
 	{
@@ -27,6 +29,8 @@ int ft_strlen(char *str)
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+        return (NULL);
 	while (*s)
 	{
 		if (*s == (char)c)
@@ -48,8 +52,8 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 	i = 0;
 	j = start;
-	// if (!s || start > ft_strlen(s))
-	// 	return (ft_strdup(""));
+	if (!s || start > ft_strlen(s))
+		return (ft_strdup(""));
 	if (start + len > ft_strlen(s))
 		len = ft_strlen(s) - start;
 	p = (char *)malloc(len + 1);
@@ -73,6 +77,10 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
+	if (!s1)
+		s1 = "";
+	if (!s2)
+		s2 = "";
 	while (s1[i])
 		i++;
 	while (s2[j])
@@ -96,11 +104,13 @@ char	*ft_strjoin(char *s1, char *s2)
 char	*ft_strdup(char *s)
 {
 	char	*ss;
-	int		len;
-	int		i;
+	size_t	len;
+	size_t	i;
 
 	i = 0;
 	len = 0;
+	 if (!s)
+        return (NULL); 
 	while (s[len])
 		len++;
 	ss = (char *)malloc(len + 1);
