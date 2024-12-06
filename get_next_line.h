@@ -6,22 +6,21 @@
 /*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 23:22:11 by root              #+#    #+#             */
-/*   Updated: 2024/12/04 20:44:50 by hes-saou         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:27:59 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <stddef.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 0
+#  define BUFFER_SIZE 2
 # endif
 
 char	*get_next_line(int fd);

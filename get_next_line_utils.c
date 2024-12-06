@@ -6,7 +6,7 @@
 /*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 23:32:11 by root              #+#    #+#             */
-/*   Updated: 2024/11/30 11:32:35 by hes-saou         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:05:43 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(char *str)
 	size_t	count;
 
 	if (!str)
-        return (0);
+		return (0);
 	count = 0;
 	while (*str)
 	{
@@ -30,7 +30,7 @@ size_t	ft_strlen(char *str)
 char	*ft_strchr(const char *s, int c)
 {
 	if (!s)
-        return (NULL);
+		return (NULL);
 	while (*s)
 	{
 		if (*s == (char)c)
@@ -74,6 +74,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 	char	*p;
+	int		len;
 
 	i = 0;
 	j = 0;
@@ -81,15 +82,10 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = "";
 	if (!s2)
 		s2 = "";
-	while (s1[i])
-		i++;
-	while (s2[j])
-		j++;
-	p = (char *)malloc(i + j + 1);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	p = (char *)malloc(len + 1);
 	if (!p)
 		return (NULL);
-	i = 0;
-	j = 0;
 	while (s1[i])
 	{
 		p[i] = s1[i];
@@ -109,8 +105,8 @@ char	*ft_strdup(char *s)
 
 	i = 0;
 	len = 0;
-	 if (!s)
-        return (NULL); 
+	if (!s)
+		return (NULL);
 	while (s[len])
 		len++;
 	ss = (char *)malloc(len + 1);
