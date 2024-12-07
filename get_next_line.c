@@ -6,7 +6,7 @@
 /*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:33:46 by root              #+#    #+#             */
-/*   Updated: 2024/12/06 22:05:14 by hes-saou         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:17:35 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ char	*read_to_remainder(int fd, char *remainder)
 	return (remainder);
 }
 
+void	free_remainder(char **remainder)
+{
+	free(*remainder);
+	*remainder = NULL;
+}
+
 char	*extract_line(char **remainder)
 {
 	char	*line;
@@ -52,18 +58,16 @@ char	*extract_line(char **remainder)
 		temp = ft_strdup(newline + 1);
 		if (!line || !temp)
 		{
-			free(*remainder);
-			*remainder = NULL;
+			free_remainder(remainder);
 			return (NULL);
 		}
-		free(*remainder);
+		free_remainder(remainder);
 		*remainder = temp;
 	}
 	else
 	{
 		line = ft_strdup(*remainder);
-		free(*remainder);
-		*remainder = NULL;
+		free_remainder(remainder);
 	}
 	return (line);
 }
@@ -85,9 +89,3 @@ char	*get_next_line(int fd)
 	line = extract_line(&remainder);
 	return (line);
 }
-
-// return Number of bytes read on success
-// return 0 on reaching the end of file
-// return -1 on error
-// return -1 on signal interrupt
-// ft_strdup(line)
