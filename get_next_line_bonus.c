@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 21:33:46 by root              #+#    #+#             */
-/*   Updated: 2024/12/07 14:51:19 by hes-saou         ###   ########.fr       */
+/*   Created: 2024/12/07 14:28:25 by hes-saou          #+#    #+#             */
+/*   Updated: 2024/12/07 14:37:41 by hes-saou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hes-saou <hes-saou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 21:33:46 by root              #+#    #+#             */
-/*   Updated: 2024/12/07 14:17:35 by hes-saou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "get_next_line_bonus.h"
 
-#include "get_next_line.h"
-
-char	*read_to_remainder(int fd, char *remainder)
+static char	*read_to_remainder(int fd, char *remainder)
 {
 	char	*buffer;
 	char	*temp;
@@ -49,13 +37,13 @@ char	*read_to_remainder(int fd, char *remainder)
 	return (remainder);
 }
 
-void	free_remainder(char **remainder)
+static void	free_remainder(char **remainder)
 {
 	free(*remainder);
 	*remainder = NULL;
 }
 
-char	*extract_line(char **remainder)
+static char	*extract_line(char **remainder)
 {
 	char	*line;
 	char	*newline;
@@ -86,18 +74,19 @@ char	*extract_line(char **remainder)
 
 char	*get_next_line(int fd)
 {
-	static char	*remainder = NULL;
+	static char	*remainder[FD_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FD_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	remainder = read_to_remainder(fd, remainder);
-	if (!remainder || !*remainder)
+	remainder[fd] = read_to_remainder(fd, remainder[fd]);
+	if (!remainder[fd])
+		return (NULL);
+	line = extract_line(&remainder[fd]);
+	if (!line)
 	{
-		free(remainder);
-		remainder = NULL;
-		return (NULL);
+		free(remainder[fd]);
+		remainder[fd] = NULL;
 	}
-	line = extract_line(&remainder);
 	return (line);
 }
